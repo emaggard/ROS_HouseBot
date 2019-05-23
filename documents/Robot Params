@@ -1,0 +1,83 @@
+
+Motor: DF Robot 12V 146RPM w/encoder, Model 28PA51G
+encoderCount       		52.0     // encoder counts per revolution 
+gearRatio          		51.0     // motor drive gear ratio
+wheelEncCount      	2652     // encoder counts per wheel rev
+wheelTrack         		.241     // distance between wheels (meters)
+wheelCirm          		.483     // distance wheel travels in one rotation (meters)
+countDist          			.000182  // distance in meters for each encoder count
+motorL_Zero        		1500     // zero speed for left motor (note: need to test to find out, not all are 1500)
+motorR_Zero        		1500     // zero speed for right motor
+motor_max          		2100     // max motor voltage
+motor_min          		900      // min motor voltage
+
+// motor and encoder variables
+boolean pub_enc = false;            // flag to publish encoder values
+long encoderL_Prev;                 // previous encoder reading
+long encoderR_Prev;
+long encoderL_Cur;                  // current encoder reading
+long encoderR_Cur;
+long odom_encoderL;
+long odom_encoderR;
+double motorL_Vel;                  // motor velocity speed
+double motorR_Vel;
+//double right_vel;                   // velocity sent to motors, also used for position calculations
+//double left_vel;
+
+
+// ROS messages
+std_msgs::UInt64 encoderL_msg;
+std_msgs::UInt64 encoderR_msg;
+std_msgs::Float64 motorL_sp;
+std_msgs::Float64 motorR_sp;
+geometry_msgs::Twist msg;
+nav_msgs::Odometry odom_msg;
+geometry_msgs::TransformStamped odom_trans;
+std_msgs::Float64 Kp;
+std_msgs::Float64 Ki;
+std_msgs::Float64 Kd;
+std_msgs::UInt64 stop_msg;
+ros::Time current_time;
+ros::Time last_time;
+
+// ROS message handlers
+ros::NodeHandle nh;
+//ros::Publisher leftEncoder("leftEncoder", &encoderL_msg);
+//ros::Publisher rightEncoder("rightEncoder", &encoderR_msg);
+ros::Publisher odom("base_odom", &odom_msg);
+//ros::Publisher Pub("ard_odom", &odom_msg);
+ros::Publisher leftSpeed("speed_left", &motorL_sp);
+ros::Publisher rightSpeed("speed_right", &motorR_sp);
+
+// variables for PID control
+double InputL, OutputL, SetpointL; // input, output, and setpoint
+double InputR, OutputR, SetpointR; // input, output, and setpoint
+double Kp1=2.0, Ki1=0.05, Kd1=0.1; // Proportional, Integral, Derviative
+double Kp2=2.0, Ki2=0.05, Kd2=0.1; // Proportional, Integral, Derviative
+int sampleTime = 200;              // sampling in ms
+int errorCount = 0;
+
+// odometry variables
+uint32_t timer;
+uint32_t pubTime = 500;
+const double degree = M_PI/180;
+double x = 0.0;
+double y = 0.0;
+double th = 0.0;
+double vx = 0.0;
+double vy = 0.0;
+double vth = 0.0;
+tf::TransformBroadcaster odom_broadcaster;
+
+
+
+
+
+Remove?
+wheelScaling       		2.5      // scaling to apply to velocity
+boolean bStop = true;               // tells motors to stop
+boolean bPID = false;               // flag for PID algorithm
+boolean bEStop = false;             // flag for e-stop
+
+
+

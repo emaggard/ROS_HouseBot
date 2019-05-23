@@ -1,0 +1,60 @@
+Setting up network:
+	Master: 
+		export ROS_IP=192.168.0.13
+	Setup bash file:
+		sudo nano ~/.bashrc
+
+		source /opt/ros/indigo/setup.bash
+		source ~/catkin_ws/devel/setup.bash
+		export ROS_IP=192.168.0.13
+		export ROS_MASTER_URI=http://192.168.0.13:11311
+
+
+Recording RosBag:
+	cd ~/bagfiles
+	rosbag record -O myLidarData /scan /tf
+
+
+starting launch file:
+
+	roslaunch robot_bringup minimal.launch
+
+viewing topics:
+
+	rostopic list
+
+viewing image stream:
+
+	rostopic 
+
+viewing lidar data stream:
+
+	rostopic echo /scan
+
+publish commands to drive motors:
+
+	rostopic pub /cmd_vel geometry_msgs/Twist '{ linear: {x: 0.5} }'
+	rostopic pub /cmd_vel geometry_msgs/Twist '{ linear: {x: 1.0} }'
+	rostopic pub /cmd_vel geometry_msgs/Twist '{ linear: {x: 0.0} }'
+
+save data to rosbag:
+
+	rosbag record -a   						(records all topics)
+	rosbag record rosout cmd_vel scan		(records topics cmd_vel and scan)
+
+building map with Hector Mapping:
+
+
+
+View Image
+	rosrun image_view
+
+	rosrun usb_cam usb_cam_node _video_device:=/dev/video2
+	python ros_cv_image.py
+
+	Note: needed to install:
+	sudo apt-get install ros-indigo-compressed-image-transport
+
+Laser
+	rosrun xv_11_laser_driver neato_laser_publisher _port:=/dev/ttyACM0 _firmware_version:=2
+	rostopic echo /scan
