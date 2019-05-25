@@ -1,16 +1,20 @@
 # ROS_HouseBot
 
-This is a repo for a house robot built on ROS.  It was leveraged from the design idea of the turtlebot.  It is modular and has movable shelves to experiment with various sensors and positions.  The purpose is to experiment with sensors and learn about computer vision and navigation in a home or office environment. 
+This is a repo for a house robot built on ROS.  It was leveraged from the design idea of the turtlebot.  It is modular and has movable shelves to experiment with various sensors and positions.  The purpose is to experiment with sensors and learn about computer vision and navigation in the home or office environment. 
+
+![HouseBot](HouseBot.jpg)
 
 ### Parts List
 
-* Jetson TX2
-* Arduino Mega w/RoboGaia Encoder Shield
-* Sabertooth DC Motor Driver
-* 12V DC Motors with encoders
-* 12V Lithium Iron Battery
-* VX-11 Lidar
-* Logitech 920C Webcam
+* Jetson TX2 - https://developer.nvidia.com/embedded/buy/jetson-tx2
+* Arduino Mega - https://store.arduino.cc/usa/mega-2560-r3 
+* RoboGaia Encoder Shield - https://www.robogaia.com/3-axis-encoder-conter-arduino-shield.html 
+* Sabertooth DC Motor Driver - https://www.dimensionengineering.com/products/sabertooth2x12
+* 12V DC Motors with encoders - https://www.dfrobot.com/product-777.html
+* 12V Lithium Iron Battery - https://www.amazon.com/Battery-Tender-BTL35A480C-Lithium-Phosphate/dp/B00F9LPL5E
+* VX-11 Lidar - https://www.getsurreal.com/product/xv-lidar-sensor-mount-package/
+* Logitech 920C Webcam - https://www.amazon.com/Logitech-Widescreen-Calling-Recording-Desktop/dp/B006JH8T3S 
+* 9DOF IMU - https://www.adafruit.com/product/2472 
 
 ### System Architecture
 
@@ -39,8 +43,7 @@ Following ROS Melodic install: http://wiki.ros.org/melodic/Installation/Ubuntu
 Installed ROS Base:   
 $ sudo apt install ros-melodic-ros-base
 
-
-Installed components:
+Installed components:   
 $ sudo apt-get install ros-melodic-nav-core ros-melodic-nav2d   
 $ sudo apt-get install ros-melodic-rosserial-python ros-melodic-rosserial-server   
 $ sudo apt-get install ros-melodic-tf2 ros-melodic-tf2-ros   
@@ -59,12 +62,12 @@ $ sudo apt-get install ros-melodic-cartographer
 Some components are not native under ROS Melodic, so you have to download the packages and compile them on the system.  You can also compile them if you want to modify the code and maybe contribute to the packages.
 
 Packages downloaded and compiled:
-* robot_upstart - 
-* imu_compass - 
-* vision_opencv - 
-* image_pipeline - 
-* hector_slam - 
-* xv_11_laser_driver - 
+* robot_upstart - https://github.com/clearpathrobotics/robot_upstart 
+* imu_compass - https://github.com/clearpathrobotics/imu_compass 
+* vision_opencv - https://github.com/ros-perception/vision_opencv 
+* image_pipeline - https://github.com/ros-perception/image_pipeline
+* hector_slam - https://github.com/tu-darmstadt-ros-pkg/hector_slam 
+* xv_11_laser_driver - https://github.com/rohbotics/xv_11_laser_driver
 
 
 
